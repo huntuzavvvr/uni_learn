@@ -1,22 +1,28 @@
 package com.example.uni_learn.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.example.uni_learn.Repository.CategoryRepository;
+import com.example.uni_learn.dto.CategoryResponseDto;
+import com.example.uni_learn.mapper.CategoryMapper;
 import com.example.uni_learn.model.Category;
 
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
-    public CategoryService(CategoryRepository categoryRepository){
+    private CategoryMapper categoryMapper;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper){
         this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
     }
 
-    public List<Category> getCategories(){
-        return categoryRepository.findAll();
+    public List<CategoryResponseDto> getCategories(){
+        return categoryRepository.findAll().stream().map(categoryMapper::toCategoryResponseDto).collect(Collectors.toList());
     }
 
     public Category addCategory(Category category){

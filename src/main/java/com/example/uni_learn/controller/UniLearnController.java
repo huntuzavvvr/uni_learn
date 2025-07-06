@@ -3,7 +3,9 @@ package com.example.uni_learn.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CategoryDto;
+import com.example.uni_learn.dto.CategoryResponseDto;
 import com.example.uni_learn.dto.CourseDto;
+import com.example.uni_learn.dto.CourseResponseDto;
 import com.example.uni_learn.mapper.CategoryMapper;
 import com.example.uni_learn.mapper.CourseMapper;
 import com.example.uni_learn.model.Category;
@@ -36,10 +38,19 @@ public class UniLearnController {
         this.categoryMapper = categoryMapper;
     }
 
+    // Получить все курсы
+
+    // @GetMapping("/courses")
+    // public List<Course> getCourses() {
+    //     return courseService.getCourses();
+    // }
+
     @GetMapping("/courses")
-    public List<Course> getCourses() {
+    public List<CourseResponseDto> getCourses() {
         return courseService.getCourses();
     }
+    
+    // Добавить курс
 
     @PostMapping("/courses")
     public Course addCourse(@RequestBody CourseDto courseDto) {
@@ -47,11 +58,19 @@ public class UniLearnController {
         return courseService.addCourse(course);
     }
     
+    // Получить все категории
+
+    // @GetMapping("/categories")
+    // public List<Category> getCategories() {
+    //     return categoryService.getCategories();
+    // }
+
     @GetMapping("/categories")
-    public List<Category> getCategories() {
+    public List<CategoryResponseDto> getCategories() {
         return categoryService.getCategories();
     }
     
+    // Добавить категорию
 
     @PostMapping("/categories")
     public Category addCategory(@RequestBody CategoryDto categoryDto) {
@@ -59,5 +78,6 @@ public class UniLearnController {
         return categoryService.addCategory(category);
     }
     
+
     
 }
