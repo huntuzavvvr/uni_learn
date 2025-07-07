@@ -6,12 +6,17 @@ import com.example.uni_learn.dto.CategoryDto;
 import com.example.uni_learn.dto.CategoryResponseDto;
 import com.example.uni_learn.dto.CourseDto;
 import com.example.uni_learn.dto.CourseResponseDto;
+import com.example.uni_learn.dto.LectureDto;
+import com.example.uni_learn.dto.LectureResponseDto;
 import com.example.uni_learn.mapper.CategoryMapper;
 import com.example.uni_learn.mapper.CourseMapper;
+import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Category;
 import com.example.uni_learn.model.Course;
+import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.CategoryService;
 import com.example.uni_learn.service.CourseService;
+import com.example.uni_learn.service.LectureService;
 
 import java.util.List;
 
@@ -29,22 +34,22 @@ public class UniLearnController {
     private CourseService courseService;
     private CourseMapper courseMapper;
     private CategoryMapper categoryMapper;
+    private LectureService lectureService;
+    private LectureMapper lectureMapper;
 
     public UniLearnController(CourseService courseService, CourseMapper courseMapper, 
-    CategoryService categoryService, CategoryMapper categoryMapper){
+    CategoryService categoryService, CategoryMapper categoryMapper, LectureService lectureService, LectureMapper lectureMapper){
         this.courseService = courseService;
         this.courseMapper = courseMapper;
         this.categoryService = categoryService;
         this.categoryMapper = categoryMapper;
+        this.lectureService = lectureService;
+        this.lectureMapper = lectureMapper;
     }
 
-    // Получить все курсы
+    // Получить все курсы 
 
-    // @GetMapping("/courses")
-    // public List<Course> getCourses() {
-    //     return courseService.getCourses();
-    // }
-
+    // В категории пишутся названия курсов которые так же относятся к категории
     @GetMapping("/courses")
     public List<CourseResponseDto> getCourses() {
         return courseService.getCourses();
@@ -59,11 +64,7 @@ public class UniLearnController {
     }
     
     // Получить все категории
-
-    // @GetMapping("/categories")
-    // public List<Category> getCategories() {
-    //     return categoryService.getCategories();
-    // }
+    // В курсах пишутся категории к которым так же относится курс
 
     @GetMapping("/categories")
     public List<CategoryResponseDto> getCategories() {
@@ -78,6 +79,20 @@ public class UniLearnController {
         return categoryService.addCategory(category);
     }
     
+    // Получить все лекции
 
+    @GetMapping("/lectures")
+    public List<LectureResponseDto> getLectures() {
+        return lectureService.getLectures();
+    }
+    
+    // Добавить лекцию
+    @PostMapping("/lectures")
+    public Lecture addLecture(@RequestBody LectureDto lectureDto) {
+        //TODO: process POST request
+        Lecture lecture = lectureMapper.toLecture(lectureDto);
+        return lectureService.addLecture(lecture);
+    }
+    
     
 }
