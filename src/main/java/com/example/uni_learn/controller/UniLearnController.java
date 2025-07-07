@@ -4,17 +4,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CategoryDto;
 import com.example.uni_learn.dto.CategoryResponseDto;
+import com.example.uni_learn.dto.CommentDto;
+import com.example.uni_learn.dto.CommentResponseDto;
 import com.example.uni_learn.dto.CourseDto;
 import com.example.uni_learn.dto.CourseResponseDto;
 import com.example.uni_learn.dto.LectureDto;
 import com.example.uni_learn.dto.LectureResponseDto;
 import com.example.uni_learn.mapper.CategoryMapper;
+import com.example.uni_learn.mapper.CommentMapper;
 import com.example.uni_learn.mapper.CourseMapper;
 import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Category;
+import com.example.uni_learn.model.Comment;
 import com.example.uni_learn.model.Course;
 import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.CategoryService;
+import com.example.uni_learn.service.CommentService;
 import com.example.uni_learn.service.CourseService;
 import com.example.uni_learn.service.LectureService;
 
@@ -36,15 +41,21 @@ public class UniLearnController {
     private CategoryMapper categoryMapper;
     private LectureService lectureService;
     private LectureMapper lectureMapper;
+    private CommentService commentService;
+    private CommentMapper commentMapper;
 
     public UniLearnController(CourseService courseService, CourseMapper courseMapper, 
-    CategoryService categoryService, CategoryMapper categoryMapper, LectureService lectureService, LectureMapper lectureMapper){
+    CategoryService categoryService, CategoryMapper categoryMapper, 
+    LectureService lectureService, LectureMapper lectureMapper, 
+    CommentService commentService, CommentMapper commentMapper){
         this.courseService = courseService;
         this.courseMapper = courseMapper;
         this.categoryService = categoryService;
         this.categoryMapper = categoryMapper;
         this.lectureService = lectureService;
         this.lectureMapper = lectureMapper;
+        this.commentService = commentService;
+        this.commentMapper = commentMapper;
     }
 
     // Получить все курсы 
@@ -58,7 +69,7 @@ public class UniLearnController {
     // Добавить курс
 
     @PostMapping("/courses")
-    public Course addCourse(@RequestBody CourseDto courseDto) {
+    public CourseResponseDto addCourse(@RequestBody CourseDto courseDto) {
         Course course = courseMapper.toEntity(courseDto);
         return courseService.addCourse(course);
     }
@@ -89,10 +100,22 @@ public class UniLearnController {
     // Добавить лекцию
     @PostMapping("/lectures")
     public Lecture addLecture(@RequestBody LectureDto lectureDto) {
-        //TODO: process POST request
         Lecture lecture = lectureMapper.toLecture(lectureDto);
         return lectureService.addLecture(lecture);
     }
     
+    // Получить все комментарии
+
+    @GetMapping("/comments")
+    public List<CommentResponseDto> getComments() {
+        return commentService.getComments();
+    }
+    
+    @PostMapping("/comments")
+    public Comment addComment(@RequestBody CommentDto commentDto) {
+        //TODO: process POST request
+        Comment comment = commentMapper.toComment(commentDto);
+        return commentService.addComment(comment);
+    }
     
 }

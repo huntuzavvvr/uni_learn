@@ -1,9 +1,12 @@
 package com.example.uni_learn.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -21,4 +24,7 @@ public class Lecture {
 
     @OneToOne(mappedBy = "lecture")
     private Resource resource;
+
+    @OneToMany(mappedBy = "lecture")
+    private List<Comment> comments;
 }

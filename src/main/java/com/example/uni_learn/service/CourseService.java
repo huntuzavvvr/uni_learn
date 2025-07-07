@@ -27,7 +27,8 @@ public class CourseService {
         return courseRepository.findAll().stream().map(courseMapper::toCourseResponseDto).collect(Collectors.toList());
     }
 
-    public Course addCourse(Course course){
-        return courseRepository.save(course);
+    public CourseResponseDto addCourse(Course course){
+        courseRepository.save(course);
+        return courseMapper.toCourseResponseDto(course);
     }
 }
