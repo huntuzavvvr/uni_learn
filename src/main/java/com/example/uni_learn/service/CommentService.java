@@ -24,7 +24,8 @@ public class CommentService {
         return commentRepository.findAll().stream().map(commentMapper::toCommentResponseDto).collect(Collectors.toList());
     }
 
-    public Comment addComment(Comment comment){
-        return commentRepository.save(comment);
+    public CommentResponseDto addComment(Comment comment){
+        commentRepository.save(comment);
+        return commentMapper.toCommentResponseDto(comment);
     }
 }

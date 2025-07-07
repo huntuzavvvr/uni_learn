@@ -112,7 +112,7 @@ public class UniLearnController {
     }
     
     @PostMapping("/comments")
-    public Comment addComment(@RequestBody CommentDto commentDto) {
+    public CommentResponseDto addComment(@RequestBody CommentDto commentDto) {
         //TODO: process POST request
         Comment comment = commentMapper.toComment(commentDto);
         return commentService.addComment(comment);
