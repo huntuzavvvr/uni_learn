@@ -99,7 +99,7 @@ public class UniLearnController {
     
     // Добавить лекцию
     @PostMapping("/lectures")
-    public Lecture addLecture(@RequestBody LectureDto lectureDto) {
+    public LectureResponseDto addLecture(@RequestBody LectureDto lectureDto) {
         Lecture lecture = lectureMapper.toLecture(lectureDto);
         return lectureService.addLecture(lecture);
     }

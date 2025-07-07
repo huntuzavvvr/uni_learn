@@ -25,7 +25,8 @@ public class LectureService {
         return lectureRepository.findAll().stream().map(lectureMapper::toLectureResponseDto).collect(Collectors.toList());
     }
 
-    public Lecture addLecture(Lecture lecture){
-        return lectureRepository.save(lecture);
+    public LectureResponseDto addLecture(Lecture lecture){
+        lectureRepository.save(lecture);
+        return lectureMapper.toLectureResponseDto(lecture);
     }
 }
