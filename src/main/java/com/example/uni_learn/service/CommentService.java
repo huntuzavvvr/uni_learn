@@ -28,4 +28,8 @@ public class CommentService {
         commentRepository.save(comment);
         return commentMapper.toCommentResponseDto(comment);
     }
+
+    public List<CommentResponseDto> getCommentsByLecture(String lectureTitle){
+        return commentRepository.findAllByLectureTitle(lectureTitle).stream().map(commentMapper::toCommentResponseDto).collect(Collectors.toList());
+    }
 }
