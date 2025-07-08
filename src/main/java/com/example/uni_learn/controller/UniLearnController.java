@@ -59,77 +59,17 @@ public class UniLearnController {
         this.commentMapper = commentMapper;
     }
 
-    // Получить все курсы 
 
-    // В категории пишутся названия курсов которые так же относятся к категории
-    @GetMapping("/courses")
-    public List<CourseResponseDto> getCourses() {
-        return courseService.getCourses();
-    }
+
+
     
-    // Добавить курс
-
-    @PostMapping("/courses")
-    public CourseResponseDto addCourse(@RequestBody CourseDto courseDto) {
-        Course course = courseMapper.toEntity(courseDto);
-        return courseService.addCourse(course);
-    }
-    
-    // Получить все категории
-    // В курсах пишутся категории к которым так же относится курс
-
-    @GetMapping("/categories")
-    public List<CategoryResponseDto> getCategories() {
-        return categoryService.getCategories();
-    }
-    
-    // Добавить категорию
-
-    @PostMapping("/categories")
-    public Category addCategory(@RequestBody CategoryDto categoryDto) {
-        Category category = categoryMapper.toEntity(categoryDto); 
-        return categoryService.addCategory(category);
-    }
     
     // Получить все лекции
 
-    @GetMapping("/lectures")
-    public List<LectureResponseDto> getLectures() {
-        return lectureService.getLectures();
-    }
-
-    @GetMapping("{courseName}/lectures")
-    public List<LectureResponseDto> getMethodName(@PathVariable String courseName) {
-        return lectureService.getLecturesByCourse(courseName);
-    }
     
-    
-    // Добавить лекцию
-    @PostMapping("/lectures")
-    public LectureResponseDto addLecture(@RequestBody LectureDto lectureDto) {
-        Lecture lecture = lectureMapper.toLecture(lectureDto);
-        return lectureService.addLecture(lecture);
-    }
     
     // Получить все комментарии
 
-    @GetMapping("/comments")
-    public List<CommentResponseDto> getComments() {
-        return commentService.getComments();
-    }
-
-    @GetMapping("/{courseTitle}/lectures/{lectureTitle}/comments")
-    public List<CommentResponseDto> getCommentsByLecture(@PathVariable String courseTitle, @PathVariable String lectureTitle) {
-        System.out.println(lectureTitle);
-        return commentService.getCommentsByLecture(lectureTitle);
-    }
     
-    
-    @PostMapping("/comments")
-    public CommentResponseDto addComment(@RequestBody CommentDto commentDto) {
-        //TODO: process POST request
-        Comment comment = commentMapper.toComment(commentDto);
-        return commentService.addComment(comment);
-    }
     
 }
