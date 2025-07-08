@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class LectureDto {
     private String title;
-
-    @Nullable
-    private Integer course_id;
+    private Integer courseId;
 
 }

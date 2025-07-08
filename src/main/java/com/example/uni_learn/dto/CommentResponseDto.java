@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CommentResponseDto {
+    private Integer id;
     private String text;
     private Integer lectureId;
 }

@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 public class CourseResponseDto {
+    private Integer id;
     private String author;
     private String title;
-    private List<CategoryDto> categories; 
+    private List<Integer> categoryIds; 
 }

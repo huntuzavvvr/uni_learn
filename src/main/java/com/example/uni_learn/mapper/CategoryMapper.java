@@ -36,6 +36,7 @@ public class CategoryMapper {
 
     public CategoryResponseDto toCategoryResponseDto(Category category){
         CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
+        categoryResponseDto.setId(category.getId());
         categoryResponseDto.setTitle(category.getTitle());
         // categoryResponseDto.setCourses(category.getCourses().stream().map(courseMapper::toCourseDto).collect(Collectors.toList()));
         categoryResponseDto.setCourses(category.getCourses().stream().map(tempCategory -> {

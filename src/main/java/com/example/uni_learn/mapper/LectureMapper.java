@@ -22,15 +22,16 @@ public class LectureMapper {
     public Lecture toLecture(LectureDto lectureDto){
         Lecture lecture = new Lecture();
         lecture.setTitle(lectureDto.getTitle());
-        lecture.setCourse(courseRepository.findById(lectureDto.getCourse_id()).orElse(null));
+        lecture.setCourse(courseRepository.findById(lectureDto.getCourseId()).orElse(null));
         return lecture;
     }
 
     public LectureResponseDto toLectureResponseDto(Lecture lecture){
         LectureResponseDto lectureResponseDto = new LectureResponseDto();
+        lectureResponseDto.setId(lecture.getId());
         lectureResponseDto.setTitle(lecture.getTitle());
         // lectureResponseDto.setCourse_id(lecture.getCourse().getId());
-        lectureResponseDto.setCourse_id(Optional.ofNullable(lecture.getCourse()).map(Course::getId).orElse(null));
+        lectureResponseDto.setCourseId(Optional.ofNullable(lecture.getCourse()).map(Course::getId).orElse(null));
         
         return lectureResponseDto;
     }    

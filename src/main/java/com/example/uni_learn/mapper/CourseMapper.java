@@ -42,11 +42,10 @@ public class CourseMapper {
 
     public CourseResponseDto toCourseResponseDto(Course course){
         CourseResponseDto courseResponseDto = new CourseResponseDto();
+        courseResponseDto.setId(course.getId());
         courseResponseDto.setAuthor(course.getAuthor());
         courseResponseDto.setTitle(course.getTitle());
-
-        courseResponseDto.setCategories(course.getCategories().stream().map(categoryMapper::toCategoryDto).collect(Collectors.toList()));
-
+        courseResponseDto.setCategoryIds(course.getCategories().stream().map(Category::getId).collect(Collectors.toList()));
         return courseResponseDto;
     }
 
