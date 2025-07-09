@@ -13,5 +13,6 @@ public class CourseDto {
     private String author;
     @NotBlank(message = "Название курса не может быть пустым")
     private String title;
+    @NotEmpty(message = "Список категорий не может быть пустым")
     private List<Integer> categoryIds;
 }

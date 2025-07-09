@@ -30,8 +30,6 @@ public class CategoryController {
     public List<CategoryResponseDto> getCategories() {
         return categoryService.getCategories();
     }
-    
-    // Добавить категорию
 
     @PostMapping("/categories")
     public Category addCategory(@Valid @RequestBody CategoryDto categoryDto) {

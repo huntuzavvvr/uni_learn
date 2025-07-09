@@ -14,6 +14,8 @@ import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.LectureService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class LectureController {
 
@@ -38,7 +40,7 @@ public class LectureController {
     
     // Добавить лекцию
     @PostMapping("/lectures")
-    public LectureResponseDto addLecture(@RequestBody LectureDto lectureDto) {
+    public LectureResponseDto addLecture(@Valid @RequestBody LectureDto lectureDto) {
         Lecture lecture = lectureMapper.toLecture(lectureDto);
         return lectureService.addLecture(lecture);
     }

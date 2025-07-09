@@ -41,7 +41,6 @@ public class CommentContoller {
     
     @PostMapping("/comments")
     public CommentResponseDto addComment(@Valid @RequestBody CommentDto commentDto) {
-        //TODO: process POST request
         Comment comment = commentMapper.toComment(commentDto);
         return commentService.addComment(comment);
     }

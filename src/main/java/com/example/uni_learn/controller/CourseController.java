@@ -30,8 +30,6 @@ public class CourseController {
     public List<CourseResponseDto> getCourses() {
         return courseService.getCourses();
     }
-    
-    // Добавить курс
 
     @PostMapping("/courses")
     public CourseResponseDto addCourse(@Valid @RequestBody CourseDto courseDto) {
