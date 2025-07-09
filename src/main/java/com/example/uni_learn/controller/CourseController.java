@@ -13,6 +13,8 @@ import com.example.uni_learn.mapper.CourseMapper;
 import com.example.uni_learn.model.Course;
 import com.example.uni_learn.service.CourseService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CourseController {
 
@@ -32,7 +34,7 @@ public class CourseController {
     // Добавить курс
 
     @PostMapping("/courses")
-    public CourseResponseDto addCourse(@RequestBody CourseDto courseDto) {
+    public CourseResponseDto addCourse(@Valid @RequestBody CourseDto courseDto) {
         Course course = courseMapper.toEntity(courseDto);
         return courseService.addCourse(course);
     }

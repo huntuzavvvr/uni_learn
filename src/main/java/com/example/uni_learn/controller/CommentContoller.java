@@ -14,6 +14,8 @@ import com.example.uni_learn.mapper.CommentMapper;
 import com.example.uni_learn.model.Comment;
 import com.example.uni_learn.service.CommentService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CommentContoller {
 
@@ -38,7 +40,7 @@ public class CommentContoller {
     
     
     @PostMapping("/comments")
-    public CommentResponseDto addComment(@RequestBody CommentDto commentDto) {
+    public CommentResponseDto addComment(@Valid @RequestBody CommentDto commentDto) {
         //TODO: process POST request
         Comment comment = commentMapper.toComment(commentDto);
         return commentService.addComment(comment);

@@ -13,6 +13,8 @@ import com.example.uni_learn.mapper.CategoryMapper;
 import com.example.uni_learn.model.Category;
 import com.example.uni_learn.service.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CategoryController {
 
@@ -32,7 +34,7 @@ public class CategoryController {
     // Добавить категорию
 
     @PostMapping("/categories")
-    public Category addCategory(@RequestBody CategoryDto categoryDto) {
+    public Category addCategory(@Valid @RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto); 
         return categoryService.addCategory(category);
     }

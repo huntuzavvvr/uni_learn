@@ -8,6 +8,7 @@ import com.example.uni_learn.Repository.CommentRepository;
 import com.example.uni_learn.Repository.LectureRepository;
 import com.example.uni_learn.dto.CommentDto;
 import com.example.uni_learn.dto.CommentResponseDto;
+import com.example.uni_learn.exception.ResourceNotFoundException;
 import com.example.uni_learn.model.Comment;
 import com.example.uni_learn.model.Lecture;
 
@@ -25,7 +26,7 @@ public class CommentMapper {
     public Comment toComment(CommentDto commentDto){
         Comment comment = new Comment();
         comment.setText(commentDto.getText());
-        comment.setLecture(lectureRepository.findById(commentDto.getLectureId()).orElse(null));
+        comment.setLecture(lectureRepository.findById(commentDto.getLectureId()).orElseThrow(() -> new ResourceNotFoundException("Не найдено")));
         return comment;
     }
 
