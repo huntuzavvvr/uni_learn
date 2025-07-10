@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.uni_learn.Repository.CourseRepository;
 import com.example.uni_learn.dto.CourseResponseDto;
+import com.example.uni_learn.exception.ResourceNotFoundException;
 import com.example.uni_learn.mapper.CourseMapper;
 import com.example.uni_learn.model.Course;
 
@@ -25,6 +26,10 @@ public class CourseService {
 
     public List<CourseResponseDto> getCourses(){
         return courseRepository.findAll().stream().map(courseMapper::toCourseResponseDto).collect(Collectors.toList());
+    }
+
+    public CourseResponseDto getCourseById(Integer id){
+        return courseMapper.toCourseResponseDto(courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Курс с id " + id + " не найден")));
     }
 
     public CourseResponseDto addCourse(Course course){

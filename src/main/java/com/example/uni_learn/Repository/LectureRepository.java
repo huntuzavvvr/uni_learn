@@ -9,5 +9,5 @@ import com.example.uni_learn.model.Lecture;
 
 @Repository
 public interface LectureRepository extends JpaRepository<Lecture, Integer>{
-    public List<Lecture> findAllByCourseTitle(String courseName);
+    public List<Lecture> findAllByCourseId(Integer courseId);
 }

@@ -26,7 +26,7 @@ public class CommentMapper {
     public Comment toComment(CommentDto commentDto){
         Comment comment = new Comment();
         comment.setText(commentDto.getText());
-        comment.setLecture(lectureRepository.findById(commentDto.getLectureId()).orElseThrow(() -> new ResourceNotFoundException("Не найдено")));
+        comment.setLecture(lectureRepository.findById(commentDto.getLectureId()).orElseThrow(() -> new ResourceNotFoundException("Лекция с id " + commentDto.getLectureId() + " не найдена")));
         return comment;
     }
 

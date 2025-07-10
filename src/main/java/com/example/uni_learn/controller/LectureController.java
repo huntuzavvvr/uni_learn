@@ -15,6 +15,8 @@ import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.LectureService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class LectureController {
@@ -31,14 +33,12 @@ public class LectureController {
     public List<LectureResponseDto> getLectures() {
         return lectureService.getLectures();
     }
-
-    @GetMapping("{courseName}/lectures")
-    public List<LectureResponseDto> getMethodName(@PathVariable String courseName) {
-        return lectureService.getLecturesByCourse(courseName);
+    
+    @GetMapping("/lectures/{id}")
+    public LectureResponseDto getLectureById(@PathVariable Integer id) {
+        return lectureService.getLectureById(id);
     }
     
-    
-    // Добавить лекцию
     @PostMapping("/lectures")
     public LectureResponseDto addLecture(@Valid @RequestBody LectureDto lectureDto) {
         Lecture lecture = lectureMapper.toLecture(lectureDto);

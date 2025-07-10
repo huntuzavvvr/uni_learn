@@ -3,6 +3,7 @@ package com.example.uni_learn.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,8 @@ import com.example.uni_learn.model.Category;
 import com.example.uni_learn.service.CategoryService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class CategoryController {
@@ -31,9 +34,16 @@ public class CategoryController {
         return categoryService.getCategories();
     }
 
+    @GetMapping("/categories/{id}")
+    public CategoryResponseDto getCategoryById(@PathVariable Integer id) {
+        return categoryService.getCategoryById(id);
+    }
+    
+
     @PostMapping("/categories")
     public Category addCategory(@Valid @RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto); 
         return categoryService.addCategory(category);
     }
+
 }
