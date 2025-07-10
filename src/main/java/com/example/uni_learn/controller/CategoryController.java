@@ -2,6 +2,8 @@ package com.example.uni_learn.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CategoryDto;
 import com.example.uni_learn.dto.CategoryResponseDto;
+import com.example.uni_learn.exception.ApiError;
 import com.example.uni_learn.mapper.CategoryMapper;
 import com.example.uni_learn.model.Category;
 import com.example.uni_learn.service.CategoryService;
@@ -46,4 +49,9 @@ public class CategoryController {
         return categoryService.addCategory(category);
     }
 
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<ApiError> deleteCategoryById(@PathVariable Integer id){
+        categoryService.deleteCategoryById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

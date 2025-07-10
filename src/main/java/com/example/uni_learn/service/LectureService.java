@@ -41,4 +41,10 @@ public class LectureService {
     public List<LectureResponseDto> getLecturesByCourse(Integer id){
         return lectureRepository.findAllByCourseId(id).stream().map(lectureMapper::toLectureResponseDto).collect(Collectors.toList());
     }
+
+    public void deleteLectureById(Integer id){
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Лекция с id " + id + " не найдена"));
+        lecture.getComments().forEach(comment -> comment.setLecture(null));
+        lectureRepository.deleteById(id);
+    }
 }

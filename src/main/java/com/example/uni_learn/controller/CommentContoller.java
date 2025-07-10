@@ -2,6 +2,8 @@ package com.example.uni_learn.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,11 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CommentDto;
 import com.example.uni_learn.dto.CommentResponseDto;
+import com.example.uni_learn.exception.ApiError;
 import com.example.uni_learn.mapper.CommentMapper;
 import com.example.uni_learn.model.Comment;
 import com.example.uni_learn.service.CommentService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class CommentContoller {
@@ -32,10 +37,15 @@ public class CommentContoller {
         return commentService.getComments();
     }
 
-    @GetMapping("/{courseTitle}/lectures/{lectureTitle}/comments")
-    public List<CommentResponseDto> getCommentsByLecture(@PathVariable String courseTitle, @PathVariable String lectureTitle) {
-        System.out.println(lectureTitle);
-        return commentService.getCommentsByLecture(lectureTitle);
+    @GetMapping("/comments/{id}")
+    public CommentResponseDto getCommentById(@PathVariable Integer id) {
+        return commentService.getCommentById(id);
+    }
+    
+
+    @GetMapping("/lectures/{lectureId}/comments")
+    public List<CommentResponseDto> getCommentsByLectureId(@PathVariable Integer lectureId) {
+        return commentService.getCommentsByLectureId(lectureId);
     }
     
     
@@ -43,5 +53,11 @@ public class CommentContoller {
     public CommentResponseDto addComment(@Valid @RequestBody CommentDto commentDto) {
         Comment comment = commentMapper.toComment(commentDto);
         return commentService.addComment(comment);
+    }
+
+    @DeleteMapping("/comments/{id}")
+    public ResponseEntity<ApiError> deleteCommentById(@PathVariable Integer id){
+        commentService.deleteCommentById(id);
+        return ResponseEntity.noContent().build();
     }
 }

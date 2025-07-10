@@ -33,4 +33,10 @@ public class CategoryService {
     public Category addCategory(Category category){
         return categoryRepository.save(category);
     }
+
+    public void deleteCategoryById(Integer id){
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Категория с id " + id + " не найдена"));
+        category.getCourses().forEach(course -> course.getCategories().remove(category));
+        categoryRepository.deleteById(id);
+    }
 }

@@ -9,5 +9,5 @@ import com.example.uni_learn.model.Comment;
 
 @Repository
 public interface CommentRepository extends JpaRepository <Comment, Integer>{
-    public List<Comment> findAllByLectureTitle(String lectureTitle);
+    public List<Comment> findAllByLectureId(Integer lectureId);
 }

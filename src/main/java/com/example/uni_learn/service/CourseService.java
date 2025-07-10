@@ -36,4 +36,10 @@ public class CourseService {
         courseRepository.save(course);
         return courseMapper.toCourseResponseDto(course);
     }
+
+    public void deleteCourseById(Integer id){
+        Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Курс с id " + id + " не найден"));
+        course.getLectures().forEach(lecture -> lecture.setCourse(null));
+        courseRepository.deleteById(id);
+    }
 }

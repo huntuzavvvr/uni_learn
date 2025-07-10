@@ -2,6 +2,8 @@ package com.example.uni_learn.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.LectureDto;
 import com.example.uni_learn.dto.LectureResponseDto;
+import com.example.uni_learn.exception.ApiError;
 import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.LectureService;
@@ -43,5 +46,11 @@ public class LectureController {
     public LectureResponseDto addLecture(@Valid @RequestBody LectureDto lectureDto) {
         Lecture lecture = lectureMapper.toLecture(lectureDto);
         return lectureService.addLecture(lecture);
+    }
+
+    @DeleteMapping("/lectures/{id}")
+    public ResponseEntity<ApiError> deleteLectureById(@PathVariable Integer id){
+        lectureService.deleteLectureById(id);
+        return ResponseEntity.noContent().build();
     }
 }
