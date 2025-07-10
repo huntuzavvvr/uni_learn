@@ -19,6 +19,8 @@ import com.example.uni_learn.service.CategoryService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -53,5 +55,10 @@ public class CategoryController {
     public ResponseEntity<ApiError> deleteCategoryById(@PathVariable Integer id){
         categoryService.deleteCategoryById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/categories/{id}")
+    public CategoryResponseDto updateCategory(@PathVariable Integer id, @Valid @RequestBody CategoryDto categoryDto) {        
+        return categoryService.updateCategory(id, categoryDto);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.uni_learn.Repository.CourseRepository;
 import com.example.uni_learn.Repository.LectureRepository;
 import com.example.uni_learn.dto.LectureResponseDto;
+import com.example.uni_learn.dto.LectureUpdateDto;
 import com.example.uni_learn.exception.ResourceNotFoundException;
 import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Lecture;
@@ -46,5 +47,11 @@ public class LectureService {
         Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Лекция с id " + id + " не найдена"));
         lecture.getComments().forEach(comment -> comment.setLecture(null));
         lectureRepository.deleteById(id);
+    }
+
+    public LectureResponseDto updateLecture(Integer id, LectureUpdateDto lectureUpdateDto){
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Лекция с id " + id + " не найдена"));
+        lecture.setTitle(lectureUpdateDto.getTitle());
+        return lectureMapper.toLectureResponseDto(lectureRepository.save(lecture));
     }
 }

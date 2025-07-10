@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CommentDto;
 import com.example.uni_learn.dto.CommentResponseDto;
+import com.example.uni_learn.dto.CommentUpdateDto;
 import com.example.uni_learn.exception.ApiError;
 import com.example.uni_learn.mapper.CommentMapper;
 import com.example.uni_learn.model.Comment;
@@ -19,6 +20,8 @@ import com.example.uni_learn.service.CommentService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -59,5 +62,10 @@ public class CommentContoller {
     public ResponseEntity<ApiError> deleteCommentById(@PathVariable Integer id){
         commentService.deleteCommentById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/comments/{id}")
+    public CommentResponseDto updateComment(@PathVariable Integer id, @Valid @RequestBody CommentUpdateDto commentUpdateDto) {        
+        return commentService.updateComment(id, commentUpdateDto);
     }
 }

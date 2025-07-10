@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.example.uni_learn.Repository.CategoryRepository;
+import com.example.uni_learn.dto.CategoryDto;
 import com.example.uni_learn.dto.CategoryResponseDto;
 import com.example.uni_learn.exception.ResourceNotFoundException;
 import com.example.uni_learn.mapper.CategoryMapper;
@@ -38,5 +39,12 @@ public class CategoryService {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Категория с id " + id + " не найдена"));
         category.getCourses().forEach(course -> course.getCategories().remove(category));
         categoryRepository.deleteById(id);
+    }
+
+    public CategoryResponseDto updateCategory(Integer id, CategoryDto categoryDto){
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Категория с id " + id + " не найдена"));
+        category.setTitle(categoryDto.getTitle());
+        
+        return categoryMapper.toCategoryResponseDto(categoryRepository.save(category));
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.uni_learn.dto.CourseDto;
 import com.example.uni_learn.dto.CourseResponseDto;
+import com.example.uni_learn.dto.CourseUpdateDto;
 import com.example.uni_learn.dto.LectureResponseDto;
 import com.example.uni_learn.exception.ApiError;
 import com.example.uni_learn.mapper.CourseMapper;
@@ -22,6 +23,8 @@ import com.example.uni_learn.service.LectureService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -63,5 +66,10 @@ public class CourseController {
     public ResponseEntity<ApiError> deleteCourseById(@PathVariable Integer id){
         courseService.deleteCourseById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/courses/{id}")
+    public CourseResponseDto updateCourse(@PathVariable Integer id, @Valid @RequestBody CourseUpdateDto courseUpdateDto) { 
+        return courseService.updateCourse(id, courseUpdateDto);
     }
 }

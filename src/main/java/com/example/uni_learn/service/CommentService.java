@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.example.uni_learn.Repository.CommentRepository;
+import com.example.uni_learn.dto.CommentDto;
 import com.example.uni_learn.dto.CommentResponseDto;
+import com.example.uni_learn.dto.CommentUpdateDto;
 import com.example.uni_learn.exception.ResourceNotFoundException;
 import com.example.uni_learn.mapper.CommentMapper;
 import com.example.uni_learn.model.Comment;
@@ -40,5 +42,11 @@ public class CommentService {
 
     public void deleteCommentById(Integer id){
         commentRepository.deleteById(id);
+    }
+
+    public CommentResponseDto updateComment(Integer id, CommentUpdateDto commentUpdateDto){
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Комментарий с id " + id + " не найден"));
+        comment.setText(commentUpdateDto.getText());
+        return commentMapper.toCommentResponseDto(commentRepository.save(comment));
     }
 }
