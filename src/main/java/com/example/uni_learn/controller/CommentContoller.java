@@ -50,8 +50,8 @@ public class CommentContoller {
     public List<CommentResponseDto> getCommentsByLectureId(@PathVariable Integer lectureId) {
         return commentService.getCommentsByLectureId(lectureId);
     }
-    
-    
+
+
     @PostMapping("/comments")
     public CommentResponseDto addComment(@Valid @RequestBody CommentDto commentDto) {
         Comment comment = commentMapper.toComment(commentDto);
