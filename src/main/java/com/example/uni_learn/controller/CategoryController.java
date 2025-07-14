@@ -46,7 +46,7 @@ public class CategoryController {
     
 
     @PostMapping("/categories")
-    public Category addCategory(@Valid @RequestBody CategoryDto categoryDto) {
+    public CategoryResponseDto addCategory(@Valid @RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto); 
         return categoryService.addCategory(category);
     }

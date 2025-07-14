@@ -31,8 +31,8 @@ public class CategoryService {
         return categoryMapper.toCategoryResponseDto(categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Категория с id " + id + " не найдена")));
     }
 
-    public Category addCategory(Category category){
-        return categoryRepository.save(category);
+    public CategoryResponseDto addCategory(Category category){
+        return categoryMapper.toCategoryResponseDto(categoryRepository.save(category));
     }
 
     public void deleteCategoryById(Integer id){

@@ -22,7 +22,8 @@ public class AuthorizationService {
     }
 
     public ResponseEntity<?> login(LoginDto user){
-        if (user.getPassword().equals(userRepository.findByUsername(user.getUsername()).getPassword())){
+        User foundUser = userRepository.findByUsername(user.getUsername());
+        if (foundUser != null && user.getPassword().equals(foundUser.getPassword())){
             System.out.print(jwtUtil.generateToken(user.getUsername()));
             return ResponseEntity.ok().build();
         }
