@@ -18,6 +18,7 @@ import com.example.uni_learn.mapper.LectureMapper;
 import com.example.uni_learn.model.Lecture;
 import com.example.uni_learn.service.LectureService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 public class LectureController {
 
     private LectureService lectureService;
