@@ -26,8 +26,8 @@ public class AuthorizationController {
         this.authorizationService = authorizationService;
     }
 
-    @GetMapping("/register")
-    public User register(@RequestBody User user) {
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
         return registerService.register(user);
     }
 
