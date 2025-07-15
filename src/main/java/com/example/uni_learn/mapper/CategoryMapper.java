@@ -16,12 +16,6 @@ import com.example.uni_learn.model.Course;
 @Component
 public class CategoryMapper {
 
-    // private CourseMapper courseMapper;
-
-    // public CategoryMapper(@Lazy CourseMapper courseMapper){
-    //     this.courseMapper = courseMapper;
-    // }
-
     public Category toEntity(CategoryDto categoryDto){
         Category category = new Category();
         category.setTitle(categoryDto.getTitle());
@@ -38,7 +32,6 @@ public class CategoryMapper {
         CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
         categoryResponseDto.setId(category.getId());
         categoryResponseDto.setTitle(category.getTitle());
-        // categoryResponseDto.setCourses(category.getCourses().stream().map(courseMapper::toCourseDto).collect(Collectors.toList()));
         categoryResponseDto.setCourses(category.getCourses().stream().map(tempCategory -> {
             CourseDto courseDto = new CourseDto();
             courseDto.setAuthor(tempCategory.getAuthor());

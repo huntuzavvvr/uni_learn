@@ -34,7 +34,6 @@ public class CommentMapper {
         CommentResponseDto commentResponseDto = new CommentResponseDto();
         commentResponseDto.setId(comment.getId());
         commentResponseDto.setText(comment.getText());
-        // commentResponseDto.setLectureId(comment.getLecture().getId());
         commentResponseDto.setLectureId(Optional.ofNullable(comment.getLecture()).map(Lecture::getId).orElse(null));
         return commentResponseDto;
     }
